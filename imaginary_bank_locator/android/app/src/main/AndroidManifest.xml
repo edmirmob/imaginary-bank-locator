@@ -3,6 +3,8 @@
    <application
         android:label="imaginary_bank_locator"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyAvJF58HxeHDocaQYYsl6y5GgI9dZXOlvw"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
