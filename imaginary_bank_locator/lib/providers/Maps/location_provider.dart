@@ -29,7 +29,7 @@ class MapsProvider extends StateNotifier<LocationState>
 
   
 
-  Future<List<LocationData>> get_location() {
+  Future<List<MapsData>> get_location() {
     return read<MapsRepository>().getLocationData();
   }
 

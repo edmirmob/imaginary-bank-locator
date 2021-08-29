@@ -4,9 +4,9 @@ import 'package:http/http.dart' as baseHttp;
 
 mixin Http {
   Future<T> get<T>(String url) async {
-    return baseHttp
-        .get(
-      url,
+    return baseHttp.
+        get(Uri.parse(url)
+      
     )
         .then((response) {
       if (response.statusCode == 204) {

@@ -3,7 +3,7 @@ import 'package:imaginary_bank_locator/core/models/maps.dart';
 
 
 class LocationState {
-  final List<LocationData> locationData;
+  final List<MapsData> locationData;
   final bool loading;
 
   LocationState({
@@ -12,7 +12,7 @@ class LocationState {
   });
 
   LocationState copyWith({
-    List<LocationData> locationData,
+    List<MapsData> locationData,
     bool loading,
   }) {
     return LocationState(

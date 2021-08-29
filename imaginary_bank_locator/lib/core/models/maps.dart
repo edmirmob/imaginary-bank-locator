@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-class LocationData {
+class MapsData {
   final int id;
   final String name;
   final String address;
@@ -14,7 +14,7 @@ class LocationData {
   final double lat;
   final double long;
 
-  LocationData({
+  MapsData({
     @required this.id,
     @required this.name,
     @required this.address,
@@ -27,7 +27,7 @@ class LocationData {
     @required this.long,
   });
 
-  static LocationData fromMap(Map<String, Object> data) {
+  static MapsData fromMap(Map<String, Object> data) {
     final workingHoursData = (data['working_hours'] != null
         ? data['working_hours'] as List<dynamic>
         : null);
@@ -39,7 +39,7 @@ class LocationData {
       });
     }
 
-    return LocationData(
+    return MapsData(
       id: data['id'],
       name: data['name'],
       address: data['address'],

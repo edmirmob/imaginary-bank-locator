@@ -1,3 +1,4 @@
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -6,6 +7,7 @@ import 'package:imaginary_bank_locator/providers/Maps/location_provider.dart';
 import 'package:imaginary_bank_locator/providers/Maps/location_state.dart';
 
 import 'package:imaginary_bank_locator/ui/view_map.dart';
+import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 
 class GoogleMaps extends StatefulWidget {
@@ -16,15 +18,23 @@ class GoogleMaps extends StatefulWidget {
 }
 
 class _GoogleMapsState extends State<GoogleMaps> {
-  GoogleMapController mapController;
+  Completer<GoogleMapController> mapController;
 
   void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
+    mapController.complete(controller);
+  }
+
+  BitmapDescriptor pinLocationIcon;
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
   void initState() {
     super.initState();
+
     final internetBookmarksProvider = context.read<MapsProvider>();
 
     Future.delayed(Duration.zero)
@@ -38,10 +48,11 @@ class _GoogleMapsState extends State<GoogleMaps> {
       builder: (context, boxConstraint) {
         return Scaffold(
           appBar: AppBar(
+            backgroundColor: Color.fromRGBO(4, 160, 160, 1),
             title: Text('Mobile Assignment'),
             centerTitle: true,
           ),
-          body: Selector<LocationState, List<LocationData>>(
+          body: Selector<LocationState, List<MapsData>>(
             selector: (_, listLocation) => listLocation?.locationData,
             builder: (_, list, __) {
               if (list.length < 0) {
@@ -49,17 +60,30 @@ class _GoogleMapsState extends State<GoogleMaps> {
                   child: CircularProgressIndicator(),
                 );
               }
-              return ViewMap(list, () {
-                _onMapCreated;
-              });
+              return ViewMap(
+                list,
+                () {
+                  _onMapCreated;
+                },
+              );
             },
+          ),
+          bottomNavigationBar: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                  flex: 1,
+                  child: ElevatedButton(
+                      onPressed: () {}, child: Text('My location'))),
+              Expanded(
+                  child: ElevatedButton(
+                      onPressed: () {}, child: Text('Location'))),
+              Expanded(
+                  child: ElevatedButton(onPressed: () {}, child: Text('List'))),
+            ],
           ),
         );
       },
     );
   }
-
-  Map<MarkerId, Marker> markers =
-      <MarkerId, Marker>{}; // CLASS MEMBER, MAP OF MARKS
-
 }
