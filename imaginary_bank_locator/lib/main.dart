@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imaginary_bank_locator/routes.dart';
 import 'package:imaginary_bank_locator/ui/google_maps.dart';
 import 'package:provider/provider.dart';
 
@@ -20,8 +21,11 @@ class ImaginaryBankLocator extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Imaginary Bank Locator',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
+        
+        
       ),
+      routes: routes,
       home: GoogleMaps(),
     );
   }
