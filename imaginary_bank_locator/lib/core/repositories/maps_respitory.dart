@@ -4,7 +4,7 @@ import 'package:imaginary_bank_locator/core/models/maps.dart';
 import '../../environment_config.dart';
 
 class MapsRepository with Http {
-  Future<List<MapsData>> getLocationData() async {
+  Future<List<MapsData>> getLocationData(String name,) async {
     final response = await get(
       '${EnvironmentConfig.api_url}',
     );
@@ -15,6 +15,14 @@ class MapsRepository with Http {
         MapsData.fromMap(entity),
       );
     });
-    return items;
+    List search= <MapsData>[];
+    if(name!=''){
+  if(name!=null ){
+    
+ search.addAll(items.where((element) => element.name.toUpperCase().startsWith(name.toUpperCase()) || element.address.toUpperCase().startsWith(name.toUpperCase()))); 
+  }
+  } 
+
+    return search==[] ||  name==null || name=='' ? items:search;
   }
 }

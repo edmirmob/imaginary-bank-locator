@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:imaginary_bank_locator/routes.dart';
-import 'package:imaginary_bank_locator/ui/google_maps.dart';
+import 'package:imaginary_bank_locator/tab_navigation.dart';
 import 'package:provider/provider.dart';
 
 import 'dependency_injection.dart';
@@ -26,7 +26,7 @@ class ImaginaryBankLocator extends StatelessWidget {
         
       ),
       routes: routes,
-      home: GoogleMaps(),
+      home: TabNavigation(),
     );
   }
 }
